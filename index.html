@@ -20,7 +20,7 @@
   body{
     font-family:'Montserrat',-apple-system,"Segoe UI",sans-serif;
     background:var(--bg); color:var(--white); line-height:1.6;
-    -webkit-font-smoothing:antialiased; overflow-x:hidden; overflow-wrap:break-word; word-break:break-word;
+    -webkit-font-smoothing:antialiased; overflow-x:hidden; overflow-wrap:break-word;
   }
   .wrap{max-width:var(--maxw); margin:0 auto; padding:0 clamp(18px,5vw,40px); width:100%; overflow-x:hidden}
 
@@ -96,6 +96,27 @@
   .packlist li::before{content:"✓"; color:var(--yellow); font-weight:900; flex:none; font-size:15px; line-height:1.5}
   .packlist li b{color:var(--white); font-weight:700}
 
+  /* ====== PLANES (3 opciones) ====== */
+  .plans{display:grid; gap:16px; margin-top:6px}
+  @media(min-width:760px){ .plans{grid-template-columns:repeat(3,1fr); align-items:start; gap:14px} }
+  .plan{background:var(--card); border:1px solid var(--line); border-radius:18px; padding:clamp(20px,5vw,26px); position:relative; display:flex; flex-direction:column}
+  .plan.featured{border-color:var(--yellow); background:linear-gradient(170deg,#1c1c15,#141414); box-shadow:0 0 0 1px rgba(255,235,59,.22), 0 24px 54px -24px rgba(255,235,59,.25)}
+  @media(min-width:760px){ .plan.featured{transform:translateY(-12px)} }
+  .plan-badge{position:absolute; top:-11px; left:50%; transform:translateX(-50%); background:var(--yellow); color:#000;
+    font-size:11px; font-weight:800; letter-spacing:.09em; text-transform:uppercase; padding:5px 14px; border-radius:999px; white-space:nowrap}
+  .plan-name{font-size:13px; font-weight:800; letter-spacing:.14em; text-transform:uppercase; color:var(--grey); margin-bottom:10px}
+  .plan.featured .plan-name{color:var(--yellow)}
+  .plan-price{font-weight:900; font-size:clamp(29px,7.5vw,38px); line-height:1; letter-spacing:-.02em}
+  .plan-price{white-space:nowrap}
+  .plan-price span{display:block; margin-top:4px; white-space:nowrap; font-size:13px; font-weight:600; color:var(--grey2); letter-spacing:0}
+  .plan-desc{color:var(--grey); font-size:13px; font-weight:500; margin:11px 0 17px}
+  @media(min-width:760px){ .plan-desc{min-height:56px} }
+  .feat{list-style:none; display:grid; gap:9px; margin-top:auto}
+  .feat li{display:flex; gap:9px; align-items:flex-start; font-size:13px; font-weight:500; color:#e4e4e4}
+  .feat li::before{content:"✓"; color:var(--yellow); font-weight:900; flex:none; font-size:13px; line-height:1.35}
+  .feat li b{color:#fff; font-weight:700}
+  .inv-note{margin-top:20px; font-size:12.5px; color:var(--grey2); font-weight:500; text-align:center}
+
   /* ====== PRUEBA / MÉTRICAS ====== */
   .metrics{display:grid; grid-template-columns:1fr 1fr; gap:12px}
   .metric{background:var(--card); border:1px solid var(--line); border-radius:16px; padding:clamp(18px,4.5vw,26px)}
@@ -155,21 +176,50 @@
 
   <section>
     <div class="seclabel rv"><div class="num">03</div><h2>La inversión</h2></div>
-    <div class="pack rv">
-      <div class="price">$2.000.000<small>por mes — pack todo incluido, la pauta de Meta ya va adentro</small></div>
-      <div class="split">
-        <div class="chip">Gestión <b>$1.200.000</b></div>
-        <div class="chip">Pauta <b>$800.000</b> (incluida)</div>
+    <p class="intro rv">Tres formas de arrancar. Elegís hasta dónde querés empujar la marca — y escalás mes a mes cuando quieras.</p>
+    <div class="plans">
+
+      <div class="plan rv">
+        <div class="plan-name">Esencial</div>
+        <div class="plan-price">$800.000 <span>/ mes</span></div>
+        <div class="plan-desc">Presencia profesional constante para ordenar la marca.</div>
+        <ul class="feat">
+          <li>Instagram + Facebook</li>
+          <li><b>2 posteos</b>/semana + stories</li>
+          <li><b>2 reels</b> por mes</li>
+          <li>Community management</li>
+          <li>Reporte mensual</li>
+        </ul>
       </div>
-      <ul class="packlist">
-        <li>Gestión de <b>Instagram + Facebook</b> (TikTok opcional)</li>
-        <li><b>3 posteos de feed</b> por semana + stories diarias + <b>4 reels</b> por mes</li>
-        <li>Community management: comentarios y DMs, interacción diaria</li>
-        <li><b>1 campaña de pauta por mes</b> (armado + optimización), inversión en Meta adentro</li>
-        <li>Línea gráfica + calendario de contenidos</li>
-        <li><b>Reporte mensual</b> de métricas y resultados</li>
-      </ul>
+
+      <div class="plan featured rv">
+        <div class="plan-badge">Recomendado</div>
+        <div class="plan-name">Gestión</div>
+        <div class="plan-price">$1.200.000 <span>/ mes</span></div>
+        <div class="plan-desc">La marca creciendo con contenido profesional y constante.</div>
+        <ul class="feat">
+          <li><b>Todo lo de Esencial</b>, y además:</li>
+          <li><b>3 posteos</b>/semana + stories diarias</li>
+          <li><b>4 reels</b> por mes</li>
+          <li>Línea gráfica + calendario</li>
+          <li>Contenido que capitaliza tu diferencial</li>
+        </ul>
+      </div>
+
+      <div class="plan rv">
+        <div class="plan-name">Full</div>
+        <div class="plan-price">$2.000.000 <span>/ mes</span></div>
+        <div class="plan-desc">Contenido + publicidad: llegás a quien todavía no te conoce.</div>
+        <ul class="feat">
+          <li><b>Todo lo de Gestión</b>, y además:</li>
+          <li><b>1 campaña de pauta</b>/mes (armado + optimización)</li>
+          <li><b>Inversión en Meta incluida</b> ($800.000)</li>
+          <li>Tus promos a gente nueva de tu zona</li>
+        </ul>
+      </div>
+
     </div>
+    <p class="inv-note rv">Todos los planes son mensuales y sin permanencia. Podés subir o bajar de plan cuando quieras.</p>
   </section>
 
   <section>
