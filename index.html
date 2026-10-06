@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Propuesta de servicios — GAMMA</title>
+<script>document.documentElement.classList.add('js')</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0a0a; --bg2:#131313; --card:#1a1a1a; --line:#2a2a2a;
+    --yellow:#FFEB3B; --gold1:#FFD600; --gold2:#FFC107;
+    --white:#ffffff; --grey:#a0a0a0; --grey2:#6b6b6b;
+    --maxw:920px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth; overflow-x:hidden}
+  body{
+    font-family:'Montserrat',-apple-system,"Segoe UI",sans-serif;
+    background:var(--bg); color:var(--white); line-height:1.6;
+    -webkit-font-smoothing:antialiased; overflow-x:hidden; overflow-wrap:break-word; word-break:break-word;
+  }
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 clamp(18px,5vw,40px); width:100%; overflow-x:hidden}
+
+  /* ====== ATMÓSFERA DE FONDO ====== */
+  body::before{
+    content:""; position:fixed; inset:0; z-index:-2;
+    background:
+      radial-gradient(900px 500px at 85% -5%, rgba(255,235,59,.10), transparent 60%),
+      radial-gradient(700px 500px at 0% 100%, rgba(255,214,0,.06), transparent 55%),
+      var(--bg);
+  }
+  body::after{
+    content:""; position:fixed; inset:0; z-index:-1; opacity:.035; pointer-events:none;
+    background-image:linear-gradient(var(--white) 1px,transparent 1px),linear-gradient(90deg,var(--white) 1px,transparent 1px);
+    background-size:54px 54px;
+  }
+
+  /* ====== REVEAL ON SCROLL ====== */
+  .js .rv{opacity:0; transform:translateY(26px); transition:opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1)}
+  .js .rv.in{opacity:1; transform:none}
+  @media (prefers-reduced-motion:reduce){ .js .rv{opacity:1 !important; transform:none !important; transition:none} }
+
+  /* ====== HERO ====== */
+  header{padding:clamp(34px,7vw,60px) 0 clamp(50px,9vw,90px)}
+  .brandrow{display:flex; align-items:center; gap:11px; margin-bottom:clamp(40px,9vw,78px)}
+  .gear{width:34px;height:34px;flex:none;animation:spin 14s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .brandname{font-weight:900; letter-spacing:.14em; font-size:19px}
+  .brandname b{color:var(--yellow)}
+  .tag-top{display:inline-block; font-size:12px; font-weight:700; letter-spacing:.22em;
+    text-transform:uppercase; color:var(--yellow); margin-bottom:18px}
+  h1{font-weight:900; font-size:clamp(27px,7.4vw,66px); line-height:1.05; letter-spacing:-.02em; margin-bottom:18px}
+  h1 .hl{color:var(--yellow)}
+  .lede{font-size:clamp(15px,3.6vw,19px); color:var(--grey); max-width:30ch; font-weight:500}
+  .scroll-hint{margin-top:clamp(34px,7vw,56px); font-size:12px; letter-spacing:.2em;
+    text-transform:uppercase; color:var(--grey2); display:flex; align-items:center; gap:10px}
+  .scroll-hint span{width:34px;height:1px;background:var(--grey2);display:inline-block}
+
+  /* ====== SECCIONES ====== */
+  section{padding:clamp(40px,8vw,72px) 0; border-top:1px solid var(--line)}
+  .seclabel{display:flex; align-items:baseline; gap:14px; margin-bottom:clamp(22px,5vw,34px)}
+  .seclabel .num{font-weight:900; font-size:clamp(30px,8vw,52px); color:var(--yellow); line-height:1;
+    -webkit-text-stroke:1px var(--yellow); color:transparent}
+  .seclabel h2{font-weight:800; font-size:clamp(20px,5vw,30px); letter-spacing:-.01em}
+  .intro{color:var(--grey); font-size:clamp(14px,3.4vw,16px); margin-bottom:26px; max-width:52ch; font-weight:500}
+
+  /* diagnóstico / servicios cards */
+  .cards{display:grid; gap:14px}
+  .card{background:var(--card); border:1px solid var(--line); border-radius:16px;
+    padding:clamp(18px,4.5vw,24px); transition:border-color .3s, transform .3s, background .3s}
+  .card:hover{border-color:rgba(255,235,59,.5); transform:translateY(-3px); background:#1f1f1c}
+  .card .k{font-weight:800; font-size:clamp(15px,4vw,17px); margin-bottom:7px; display:flex; gap:10px; align-items:flex-start}
+  .card .k .dot{width:9px;height:9px;border-radius:50%;background:var(--yellow);margin-top:8px;flex:none;box-shadow:0 0 10px rgba(255,235,59,.6)}
+  .card .d{color:var(--grey); font-size:clamp(13.5px,3.4vw,15px); font-weight:500; padding-left:19px}
+  .card .d b{color:var(--white); font-weight:700}
+  @media(min-width:680px){ .cards.two{grid-template-columns:1fr 1fr} }
+
+  /* ====== PACK / PRECIO ====== */
+  .pack{background:linear-gradient(160deg,#1b1b16,#121212); border:1px solid rgba(255,235,59,.28);
+    border-radius:22px; padding:clamp(24px,6vw,42px); position:relative; overflow:hidden}
+  .pack::before{content:""; position:absolute; top:-60%; right:-20%; width:360px; height:360px;
+    background:radial-gradient(circle,rgba(255,235,59,.14),transparent 65%); pointer-events:none}
+  .price{font-weight:900; font-size:clamp(33px,8.8vw,78px); line-height:1; letter-spacing:-.03em; overflow-wrap:anywhere;
+    background:linear-gradient(100deg,var(--yellow),var(--gold2)); -webkit-background-clip:text; background-clip:text; color:transparent}
+  .price small{display:block; font-size:clamp(13px,3.4vw,15px); color:var(--grey); font-weight:600;
+    letter-spacing:.02em; -webkit-text-fill-color:var(--grey); margin-top:6px}
+  .split{display:flex; flex-wrap:wrap; gap:10px; margin:22px 0 4px}
+  .chip{background:#000; border:1px solid var(--line); border-radius:999px; padding:9px 16px;
+    font-size:13px; font-weight:700}
+  .chip b{color:var(--yellow)}
+  .packlist{list-style:none; margin-top:26px; display:grid; gap:12px}
+  .packlist li{display:flex; gap:12px; align-items:flex-start; font-size:clamp(13.5px,3.4vw,15px); font-weight:500; color:#e8e8e8}
+  .packlist li::before{content:"✓"; color:var(--yellow); font-weight:900; flex:none; font-size:15px; line-height:1.5}
+  .packlist li b{color:var(--white); font-weight:700}
+
+  /* ====== PRUEBA / MÉTRICAS ====== */
+  .metrics{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+  .metric{background:var(--card); border:1px solid var(--line); border-radius:16px; padding:clamp(18px,4.5vw,26px)}
+  .metric .big{font-weight:900; font-size:clamp(28px,8vw,46px); color:var(--yellow); line-height:1; letter-spacing:-.02em}
+  .metric .lbl{color:var(--grey); font-size:clamp(11.5px,2.9vw,13px); font-weight:600; margin-top:9px; line-height:1.4}
+  .source{margin-top:16px; font-size:12px; color:var(--grey2); font-weight:500; font-style:italic}
+
+  /* ====== CTA / FOOTER ====== */
+  .cta{margin-top:clamp(40px,8vw,64px); text-align:center; padding:clamp(34px,7vw,56px) 0}
+  .cta h3{font-weight:900; font-size:clamp(22px,6vw,38px); letter-spacing:-.02em; margin-bottom:14px}
+  .cta h3 .hl{color:var(--yellow)}
+  .cta p{color:var(--grey); font-size:clamp(14px,3.4vw,16px); font-weight:500; max-width:42ch; margin:0 auto 28px}
+  .contact{display:inline-flex; flex-wrap:wrap; justify-content:center; gap:10px 22px; align-items:center;
+    border-top:1px solid var(--line); padding-top:28px; margin-top:8px; font-size:13.5px; color:var(--grey); font-weight:600}
+  .contact b{color:var(--yellow); font-weight:800; letter-spacing:.08em}
+  .contact a{color:var(--grey); text-decoration:none}
+  footer{padding:30px 0 46px; text-align:center; color:var(--grey2); font-size:11.5px; font-weight:600; letter-spacing:.05em}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="brandrow rv in">
+      <svg class="gear" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M12 8.5a3.5 3.5 0 100 7 3.5 3.5 0 000-7z" fill="#FFEB3B"/>
+        <path d="M12 1.5l1.5 2.6 2.9-.8.3 3 2.9 1-1 2.8 2 2.2-2 2.2 1 2.8-2.9 1-.3 3-2.9-.8L12 22.5l-1.5-2.6-2.9.8-.3-3-2.9-1 1-2.8-2-2.2 2-2.2-1-2.8 2.9-1 .3-3 2.9.8L12 1.5z" stroke="#FFEB3B" stroke-width="1.3" stroke-linejoin="round"/>
+      </svg>
+      <div class="brandname">GAM<b>MA</b></div>
+    </div>
+    <div class="tag-top rv">Gestión de redes + publicidad</div>
+    <h1 class="rv">Más viajes para<br><span class="hl">Transporte GAF</span>,<br>no solo más posteos.</h1>
+    <p class="lede rv">Manejo de redes y campañas pensadas para que te encuentre quien está por mudarse — mudanzas, fletes y logística en todo AMBA.</p>
+    <div class="scroll-hint rv"><span></span>Mirá cómo</div>
+  </header>
+
+  <section>
+    <div class="seclabel rv"><div class="num">01</div><h2>Lo que vemos en tu negocio</h2></div>
+    <p class="intro rv">Miramos tus redes y tu web antes de escribirte. Esto es lo que encontramos:</p>
+    <div class="cards two">
+      <div class="card rv"><div class="k"><span class="dot"></span>Instagram activo, pero chico</div><div class="d"><b>@transporte_gaf</b> tiene buen material —reels de camiones y trabajos reales— pero con <b>~1.700 seguidores</b> hay muchísima gente de AMBA que te necesita y todavía no te ve.</div></div>
+      <div class="card rv"><div class="k"><span class="dot"></span>La web quedó en el tiempo</div><div class="d">Las últimas fotos son de <b>agosto 2025</b>: mientras el Instagram se mueve, la web quedó parada. La marca se ve despareja según por dónde te encuentren.</div></div>
+      <div class="card rv"><div class="k"><span class="dot"></span>Todo orgánico, techo bajo</div><div class="d">Tus promos buenas le llegan casi solo a quien <b>ya te sigue</b>, no a quien está por mudarse y todavía no te conoce.</div></div>
+      <div class="card rv"><div class="k"><span class="dot"></span>Un diferencial sin explotar</div><div class="d">Transporte para <b>bandas y producciones teatrales</b>: un nicho de trabajos de mayor valor que hoy pasa desapercibido.</div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="seclabel rv"><div class="num">02</div><h2>Qué hacemos por vos</h2></div>
+    <p class="intro rv">Cada cosa que hacemos ataca uno de esos puntos:</p>
+    <div class="cards two">
+      <div class="card rv"><div class="k"><span class="dot"></span>Constancia profesional</div><div class="d">3 posteos/semana + stories diarias + 4 reels/mes → el Instagram crece más allá de los que ya te siguen.</div></div>
+      <div class="card rv"><div class="k"><span class="dot"></span>1 campaña de pauta por mes</div><div class="d"><b>La inversión en Meta ya va incluida.</b> Tus promos le llegan a gente de tu zona que está por mudarse y hoy no te ve.</div></div>
+      <div class="card rv"><div class="k"><span class="dot"></span>Línea gráfica + calendario</div><div class="d">Una sola cara de marca, prolija y coherente en tus redes (Instagram y Facebook).</div></div>
+      <div class="card rv"><div class="k"><span class="dot"></span>Community management</div><div class="d">Respondemos DMs y comentarios, interacción diaria → enganchamos al que todavía está mirando.</div></div>
+      <div class="card rv"><div class="k"><span class="dot"></span>Capitalizamos tu diferencial</div><div class="d">Contenido de bandas, producciones y viajes al interior → trabajos de mayor valor, no solo el flete chico.</div></div>
+      <div class="card rv"><div class="k"><span class="dot"></span>Reporte mensual</div><div class="d">Ves en números qué contenido y qué campaña te trae clientes.</div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="seclabel rv"><div class="num">03</div><h2>La inversión</h2></div>
+    <div class="pack rv">
+      <div class="price">$2.000.000<small>por mes — pack todo incluido, la pauta de Meta ya va adentro</small></div>
+      <div class="split">
+        <div class="chip">Gestión <b>$1.200.000</b></div>
+        <div class="chip">Pauta <b>$800.000</b> (incluida)</div>
+      </div>
+      <ul class="packlist">
+        <li>Gestión de <b>Instagram + Facebook</b> (TikTok opcional)</li>
+        <li><b>3 posteos de feed</b> por semana + stories diarias + <b>4 reels</b> por mes</li>
+        <li>Community management: comentarios y DMs, interacción diaria</li>
+        <li><b>1 campaña de pauta por mes</b> (armado + optimización), inversión en Meta adentro</li>
+        <li>Línea gráfica + calendario de contenidos</li>
+        <li><b>Reporte mensual</b> de métricas y resultados</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="seclabel rv"><div class="num">04</div><h2>La prueba</h2></div>
+    <p class="intro rv">Resultados reales de campañas de pauta gestionadas por GAMMA. Medidos, no estimados.</p>
+    <div class="metrics">
+      <div class="metric rv"><div class="big">$173,82</div><div class="lbl">costo por conversación nueva (lead) vía pauta</div></div>
+      <div class="metric rv"><div class="big">61</div><div class="lbl">conversaciones nuevas generadas</div></div>
+      <div class="metric rv"><div class="big">$10.603</div><div class="lbl">invertidos en pauta</div></div>
+      <div class="metric rv"><div class="big">2 meses</div><div class="lbl">de campaña continua, sin cortes</div></div>
+    </div>
+    <p class="source rv">Cada peso de pauta trabajando para traerte conversaciones, no likes sueltos.</p>
+  </section>
+
+  <div class="cta rv">
+    <h3>Listos para poner a <span class="hl">GAF</span> adelante.</h3>
+    <p>Arrancamos cuando quieras: en el primer mes ya ves contenido saliendo y la primera campaña midiendo.</p>
+    <div class="contact">
+      <b>GAMMA</b>
+      <a href="mailto:info@gammaautomatizaciones.com">info@gammaautomatizaciones.com</a>
+      <a href="https://gammaautomatizaciones.com">gammaautomatizaciones.com</a>
+    </div>
+  </div>
+
+  <footer>GAMMA Automatizaciones · Propuesta preparada para Transporte GAF</footer>
+</div>
+
+<script>
+  const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12,rootMargin:'0px 0px -8% 0px'});
+  document.querySelectorAll('.rv:not(.in)').forEach((el,i)=>{el.style.transitionDelay=Math.min(i%6*60,300)+'ms';io.observe(el)});
+</script>
+</body>
+</html>
